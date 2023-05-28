@@ -425,7 +425,7 @@ namespace JSONExplorerPro
 
         private void contactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string developerName = "CyberPhoenix";
+            string developerName = "Dheeraj Kumar";
             string developerEmail = "cyberphoenix0250@gmail.com";
 
             // Display the contact information in a MessageBox
