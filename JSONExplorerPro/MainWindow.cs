@@ -12,12 +12,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.IO;
 
 namespace JSONExplorerPro
 {
     public partial class MainWindow : Form
     {
         private const int IndentationSpaces = 4;
+        private string currentFilePath = string.Empty;
         public MainWindow()
         {
             InitializeComponent();
@@ -222,6 +225,188 @@ namespace JSONExplorerPro
         private void minifyJSONToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MinifyJson();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if there are unsaved changes
+            if (UnsavedChangesPrompt())
+            {
+                // Save the existing file before creating a new one
+                SaveFile();
+            }
+
+            // Clear the editor and reset the current file path
+            richTextBox.Text = string.Empty;
+            currentFilePath = string.Empty;
+            richTextBox.Enabled = true;
+        }
+
+        private void browseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if there are unsaved changes
+            if (UnsavedChangesPrompt())
+            {
+                // Save the existing file before browsing for a new one
+                SaveFile();
+            }
+
+            // Open file dialog to browse for JSON file
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON Files|*.json";
+            openFileDialog.Title = "Browse JSON File";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Read the selected file and display its content in the editor
+                string filePath = openFileDialog.FileName;
+                currentFilePath = filePath;
+
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    richTextBox.Text = json;
+                    richTextBox.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error reading the file: " + ex.Message);
+                }
+            }
+        }
+
+        private void loadURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if there are unsaved changes
+            if (UnsavedChangesPrompt())
+            {
+                // Save the existing file before loading JSON from a URL
+                SaveFile();
+            }
+
+            // Prompt the user for a URL
+            string url = PromptForURL();
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                try
+                {
+                    // Fetch the JSON data from the URL
+                    string json = FetchJSONFromURL(url);
+
+                    // Display the fetched JSON data in the editor
+                    richTextBox.Text = json;
+                    richTextBox.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading JSON from URL: " + ex.Message);
+                }
+            }
+        }
+        private bool UnsavedChangesPrompt()
+        {
+            // Check if there are unsaved changes in the editor
+            if (richTextBox.Modified)
+            {
+                DialogResult result = MessageBox.Show("Do you want to save the changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    return SaveFile();
+                }
+                else if (result == DialogResult.No)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool SaveFile()
+        {
+            if (string.IsNullOrEmpty(richTextBox.Text))
+            {
+                // If there is no data in the RichTextBox, return false without showing the save dialog
+                return false;
+            }
+            if (string.IsNullOrEmpty(currentFilePath))
+            {
+                // If the current file path is empty, prompt the user for a new file name
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JSON Files|*.json";
+                saveFileDialog.Title = "Save JSON File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    currentFilePath = saveFileDialog.FileName;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            try
+            {
+                // Save the content of the editor to the file
+                File.WriteAllText(currentFilePath, richTextBox.Text);
+                richTextBox.Modified = false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving the file: " + ex.Message);
+                return false;
+            }
+        }
+
+        private string PromptForURL()
+        {
+            // Prompt the user to enter a URL
+            string url = string.Empty;
+            InputDialog dialog = new InputDialog("Enter URL", "URL:");
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                url = dialog.InputValue;
+            }
+
+            return url;
+        }
+
+        private string FetchJSONFromURL(string url)
+        {
+            // Fetch JSON data from the specified URL
+            using (WebClient client = new WebClient())
+            {
+                return client.DownloadString(url);
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if there are unsaved changes
+            if (UnsavedChangesPrompt())
+            {
+                // Save the existing file before closing
+                SaveFile();
+            }
+
+            // Clear the editor and reset the current file path
+            richTextBox.Text = string.Empty;
+            currentFilePath = string.Empty;
+            richTextBox.Enabled = false;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
