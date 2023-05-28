@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("JSONExplorerPro")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("JSON Explorer Pro")]
+[assembly: AssemblyDescription("JSON Explorer Pro is a powerful tool designed for navigating and analyzing JSON (JavaScript Object Notation) data. It provides a user-friendly interface that allows users to load, explore, and manipulate JSON files with ease.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("JSONExplorerPro")]
+[assembly: AssemblyCompany("OpenSource")]
+[assembly: AssemblyProduct("JSON Explorer Pro")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

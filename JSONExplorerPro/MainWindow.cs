@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace JSONExplorerPro
 {
@@ -21,23 +23,30 @@ namespace JSONExplorerPro
     {
         private const int IndentationSpaces = 4;
         private string currentFilePath = string.Empty;
+
+        private SyntaxHighlighter syntaxHighlighter;
         public MainWindow()
         {
             InitializeComponent();
+            syntaxHighlighter = new SyntaxHighlighter(richTextBox);
         }
 
         private void richTextBox_TextChanged(object sender, EventArgs e)
         {
-            HighlightJsonSyntax();
+            syntaxHighlighter.HighlightJsonSyntax();
             Parse();
         }
 
         private void Parse()
         {
+            int currentPosition = richTextBox.SelectionStart;
+            int currentLength = richTextBox.SelectionLength;
+
             string jsonText = richTextBox.Text;
             try
             {
                 JToken json = JToken.Parse(jsonText);
+                treeView.BeginUpdate();
                 treeView.Nodes.Clear();
                 PopulateTreeView(json, treeView.Nodes);
             }
@@ -46,7 +55,15 @@ namespace JSONExplorerPro
                 treeView.Nodes.Clear();
                 toolStripStatusLabel1.Text = $"Invalid JSON {ex.Message}";
             }
+            finally
+            {
+                treeView.EndUpdate();
+            }
+
+            // Reset the selection to the original position
+            richTextBox.Select(currentPosition, currentLength);
         }
+
         private void PopulateTreeView(JToken jsonToken, TreeNodeCollection treeNodes)
         {
             switch (jsonToken.Type)
@@ -75,65 +92,6 @@ namespace JSONExplorerPro
                     break;
             }
         }
-        
-        private void HighlightJsonSyntax()
-        {
-            string json = richTextBox.Text;
-            int currentPosition = richTextBox.SelectionStart;
-
-            richTextBox.SuspendLayout();
-            richTextBox.SelectionStart = 0;
-            richTextBox.SelectionLength = richTextBox.TextLength;
-            richTextBox.SelectionColor = Color.Black;
-
-            // Regular expressions to match different JSON elements
-            string stringPattern = @"""[^""\\]*(?:\\.[^""\\]*)*""";
-            string numberPattern = @"\b\d+(\.\d+)?\b";
-            string booleanPattern = @"\b(true|false)\b";
-            string nullPattern = @"\bnull\b";
-
-            // Match strings and apply color
-            MatchCollection stringMatches = Regex.Matches(json, stringPattern);
-            foreach (Match match in stringMatches)
-            {
-                richTextBox.SelectionStart = match.Index;
-                richTextBox.SelectionLength = match.Length;
-                richTextBox.SelectionColor = Color.DarkRed;
-            }
-
-            // Match numbers and apply color
-            MatchCollection numberMatches = Regex.Matches(json, numberPattern);
-            foreach (Match match in numberMatches)
-            {
-                richTextBox.SelectionStart = match.Index;
-                richTextBox.SelectionLength = match.Length;
-                richTextBox.SelectionColor = Color.Blue;
-            }
-
-            // Match booleans and apply color
-            MatchCollection booleanMatches = Regex.Matches(json, booleanPattern);
-            foreach (Match match in booleanMatches)
-            {
-                richTextBox.SelectionStart = match.Index;
-                richTextBox.SelectionLength = match.Length;
-                richTextBox.SelectionColor = Color.Green;
-            }
-
-            // Match null values and apply color
-            MatchCollection nullMatches = Regex.Matches(json, nullPattern);
-            foreach (Match match in nullMatches)
-            {
-                richTextBox.SelectionStart = match.Index;
-                richTextBox.SelectionLength = match.Length;
-                richTextBox.SelectionColor = Color.Gray;
-            }
-
-            richTextBox.SelectionStart = currentPosition;
-            richTextBox.SelectionLength = 0;
-            richTextBox.ResumeLayout();
-            richTextBox.Refresh();
-        }
-
 
         private void MinifyJson()
         {
@@ -407,6 +365,94 @@ namespace JSONExplorerPro
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox.Cut();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox.Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox.Paste();
+        }
+
+        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            wordWrapToolStripMenuItem.Checked = !wordWrapToolStripMenuItem.Checked;
+            richTextBox.WordWrap = wordWrapToolStripMenuItem.Checked;
+        }
+
+        private void collapseAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CollapseTreeViewNodes(treeView.Nodes);
+        }
+
+        private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpandTreeViewNodes(treeView.Nodes);
+        }
+
+        private void CollapseTreeViewNodes(TreeNodeCollection nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                node.Collapse();
+                if (node.Nodes.Count > 0)
+                {
+                    CollapseTreeViewNodes(node.Nodes);
+                }
+            }
+        }
+
+        private void ExpandTreeViewNodes(TreeNodeCollection nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                node.Expand();
+                if (node.Nodes.Count > 0)
+                {
+                    ExpandTreeViewNodes(node.Nodes);
+                }
+            }
+        }
+
+        private void contactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string developerName = "CyberPhoenix";
+            string developerEmail = "cyberphoenix0250@gmail.com";
+
+            // Display the contact information in a MessageBox
+            string contactInfo = $"Developer Name: {developerName}\n" +
+                                 $"Email: {developerEmail}\n";
+
+            MessageBox.Show(contactInfo, "Developer Contact Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void aboutJSONExplorerProToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyDescriptionAttribute descriptionAttribute = (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyDescriptionAttribute));
+            AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute));
+            AssemblyProductAttribute productAttribute = (AssemblyProductAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyProductAttribute));
+            Version version = assembly.GetName().Version;
+
+            // Build the about message
+            string appName = titleAttribute?.Title ?? "";
+            string appVersion = version.ToString();
+            string appDescription = descriptionAttribute?.Description ?? "";
+            string appInfo = $"Application Name: {appName}\n" +
+                             $"Version: {appVersion}\n" +
+                             $"Description: {appDescription}";
+
+            MessageBox.Show(appInfo, "About JSON Explorer Pro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

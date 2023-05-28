@@ -31,6 +31,7 @@ namespace JSONExplorerPro
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,36 +45,29 @@ namespace JSONExplorerPro
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.minifyJSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.textBoxQuery = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxQuery = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
-            this.leftToolStrip = new System.Windows.Forms.ToolStrip();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.rightToolStrip = new System.Windows.Forms.ToolStrip();
-            this.minifyJSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contactToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutJSONExplorerProToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -91,8 +85,6 @@ namespace JSONExplorerPro
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.convertToolStripMenuItem,
-            this.formatToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -118,7 +110,7 @@ namespace JSONExplorerPro
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -128,65 +120,62 @@ namespace JSONExplorerPro
             this.browseToolStripMenuItem,
             this.loadURLToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // browseToolStripMenuItem
             // 
             this.browseToolStripMenuItem.Name = "browseToolStripMenuItem";
-            this.browseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.browseToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.browseToolStripMenuItem.Text = "Browse";
             this.browseToolStripMenuItem.Click += new System.EventHandler(this.browseToolStripMenuItem_Click);
             // 
             // loadURLToolStripMenuItem
             // 
             this.loadURLToolStripMenuItem.Name = "loadURLToolStripMenuItem";
-            this.loadURLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadURLToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.loadURLToolStripMenuItem.Text = "Load URL";
             this.loadURLToolStripMenuItem.Click += new System.EventHandler(this.loadURLToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.closeToolStripMenuItem.Text = "Close File";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem,
-            this.toolStripSeparator3,
             this.cutToolStripMenuItem,
             this.copyToolStripMenuItem,
             this.pasteToolStripMenuItem,
@@ -196,45 +185,38 @@ namespace JSONExplorerPro
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
-            // undoToolStripMenuItem
-            // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.undoToolStripMenuItem.Text = "Undo";
-            // 
-            // redoToolStripMenuItem
-            // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.redoToolStripMenuItem.Text = "Redo";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
-            // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(136, 6);
+            // 
+            // minifyJSONToolStripMenuItem
+            // 
+            this.minifyJSONToolStripMenuItem.Name = "minifyJSONToolStripMenuItem";
+            this.minifyJSONToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.minifyJSONToolStripMenuItem.Text = "Minify JSON";
+            this.minifyJSONToolStripMenuItem.Click += new System.EventHandler(this.minifyJSONToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -250,55 +232,34 @@ namespace JSONExplorerPro
             // wordWrapToolStripMenuItem
             // 
             this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
-            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.wordWrapToolStripMenuItem.Text = "Word wrap";
+            this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(133, 6);
             // 
             // collapseAllToolStripMenuItem
             // 
             this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
-            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.collapseAllToolStripMenuItem.Text = "Collapse All";
+            this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
             // 
             // expandAllToolStripMenuItem
             // 
             this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
-            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.expandAllToolStripMenuItem.Text = "Expand All";
-            // 
-            // convertToolStripMenuItem
-            // 
-            this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toCSVToolStripMenuItem,
-            this.toXMLToolStripMenuItem});
-            this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
-            this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.convertToolStripMenuItem.Text = "Convert";
-            // 
-            // toCSVToolStripMenuItem
-            // 
-            this.toCSVToolStripMenuItem.Name = "toCSVToolStripMenuItem";
-            this.toCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.toCSVToolStripMenuItem.Text = "To CSV";
-            // 
-            // toXMLToolStripMenuItem
-            // 
-            this.toXMLToolStripMenuItem.Name = "toXMLToolStripMenuItem";
-            this.toXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.toXMLToolStripMenuItem.Text = "To XML";
-            // 
-            // formatToolStripMenuItem
-            // 
-            this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
-            this.formatToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.formatToolStripMenuItem.Text = "&Format";
+            this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contactToolStripMenuItem,
+            this.aboutJSONExplorerProToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
@@ -307,31 +268,32 @@ namespace JSONExplorerPro
             // 
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxQuery,
-            this.toolStripLabel1});
+            this.toolStripLabel1,
+            this.textBoxQuery});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.toolStrip.Size = new System.Drawing.Size(922, 25);
+            this.toolStrip.Size = new System.Drawing.Size(922, 29);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(39, 26);
+            this.toolStripLabel1.Text = "Query";
+            // 
             // textBoxQuery
             // 
-            this.textBoxQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.textBoxQuery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxQuery.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBoxQuery.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.textBoxQuery.Name = "textBoxQuery";
-            this.textBoxQuery.Size = new System.Drawing.Size(200, 25);
+            this.textBoxQuery.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.textBoxQuery.Size = new System.Drawing.Size(410, 23);
             this.textBoxQuery.Tag = "";
             this.textBoxQuery.ToolTipText = "Query";
             this.textBoxQuery.TextChanged += new System.EventHandler(this.textBoxQuery_TextChanged);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
-            this.toolStripLabel1.Text = "Query";
             // 
             // statusStrip1
             // 
@@ -351,7 +313,7 @@ namespace JSONExplorerPro
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 53);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -361,73 +323,60 @@ namespace JSONExplorerPro
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightPanel);
-            this.splitContainer1.Size = new System.Drawing.Size(922, 404);
+            this.splitContainer1.Size = new System.Drawing.Size(922, 400);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 3;
             // 
             // leftPanel
             // 
             this.leftPanel.Controls.Add(this.richTextBox);
-            this.leftPanel.Controls.Add(this.leftToolStrip);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(455, 404);
+            this.leftPanel.Size = new System.Drawing.Size(455, 400);
             this.leftPanel.TabIndex = 0;
             // 
             // richTextBox
             // 
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold);
-            this.richTextBox.Location = new System.Drawing.Point(0, 25);
+            this.richTextBox.Location = new System.Drawing.Point(0, 0);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(455, 379);
+            this.richTextBox.Size = new System.Drawing.Size(455, 400);
             this.richTextBox.TabIndex = 1;
             this.richTextBox.Text = "";
             this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
             // 
-            // leftToolStrip
-            // 
-            this.leftToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.leftToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.leftToolStrip.Name = "leftToolStrip";
-            this.leftToolStrip.Size = new System.Drawing.Size(455, 25);
-            this.leftToolStrip.TabIndex = 0;
-            this.leftToolStrip.Text = "toolStrip1";
-            // 
             // rightPanel
             // 
             this.rightPanel.Controls.Add(this.treeView);
-            this.rightPanel.Controls.Add(this.rightToolStrip);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightPanel.Location = new System.Drawing.Point(0, 0);
             this.rightPanel.Name = "rightPanel";
-            this.rightPanel.Size = new System.Drawing.Size(463, 404);
+            this.rightPanel.Size = new System.Drawing.Size(463, 400);
             this.rightPanel.TabIndex = 0;
             // 
             // treeView
             // 
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.Location = new System.Drawing.Point(0, 25);
+            this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(463, 379);
+            this.treeView.Size = new System.Drawing.Size(463, 400);
             this.treeView.TabIndex = 1;
             // 
-            // rightToolStrip
+            // contactToolStripMenuItem
             // 
-            this.rightToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.rightToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.rightToolStrip.Name = "rightToolStrip";
-            this.rightToolStrip.Size = new System.Drawing.Size(463, 25);
-            this.rightToolStrip.TabIndex = 0;
-            this.rightToolStrip.Text = "toolStrip1";
+            this.contactToolStripMenuItem.Name = "contactToolStripMenuItem";
+            this.contactToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.contactToolStripMenuItem.Text = "Contact";
+            this.contactToolStripMenuItem.Click += new System.EventHandler(this.contactToolStripMenuItem_Click);
             // 
-            // minifyJSONToolStripMenuItem
+            // aboutJSONExplorerProToolStripMenuItem
             // 
-            this.minifyJSONToolStripMenuItem.Name = "minifyJSONToolStripMenuItem";
-            this.minifyJSONToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.minifyJSONToolStripMenuItem.Text = "Minify JSON";
-            this.minifyJSONToolStripMenuItem.Click += new System.EventHandler(this.minifyJSONToolStripMenuItem_Click);
+            this.aboutJSONExplorerProToolStripMenuItem.Name = "aboutJSONExplorerProToolStripMenuItem";
+            this.aboutJSONExplorerProToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.aboutJSONExplorerProToolStripMenuItem.Text = "About JSON Explorer Pro";
+            this.aboutJSONExplorerProToolStripMenuItem.Click += new System.EventHandler(this.aboutJSONExplorerProToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -437,6 +386,7 @@ namespace JSONExplorerPro
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
             this.Text = "JSON Explorer Pro";
@@ -451,9 +401,7 @@ namespace JSONExplorerPro
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
-            this.leftPanel.PerformLayout();
             this.rightPanel.ResumeLayout(false);
-            this.rightPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,15 +413,12 @@ namespace JSONExplorerPro
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Panel rightPanel;
-        private System.Windows.Forms.ToolStrip leftToolStrip;
-        private System.Windows.Forms.ToolStrip rightToolStrip;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -486,24 +431,20 @@ namespace JSONExplorerPro
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem convertToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordWrapToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toCSVToolStripMenuItem;
         private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripMenuItem toXMLToolStripMenuItem;
         private ToolStripTextBox textBoxQuery;
         private ToolStripLabel toolStripLabel1;
         private ToolStripMenuItem minifyJSONToolStripMenuItem;
+        private ToolStripMenuItem contactToolStripMenuItem;
+        private ToolStripMenuItem aboutJSONExplorerProToolStripMenuItem;
     }
 }
 
